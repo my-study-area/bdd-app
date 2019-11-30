@@ -7,7 +7,7 @@ When("I fill in the sign up form") do
 
   fill_in "user_email", :with => "tester@testdomain.test"
   fill_in "user_password", :with => "pas$$word"
-  fill_in "user_password_confirmation", :with => "pa$$word"
+  fill_in "user_password_confirmation", :with => "pas$$word"
 
   click_button "Sign up"
 end
