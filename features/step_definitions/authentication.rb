@@ -40,3 +40,20 @@ end
 Then("I should be logged in") do
   expect(page).to have_content("Signed in successfully")
 end
+
+Given("I am logged in") do
+  visit root_path
+
+  fill_in "user_email", :with => "tester@testdomain.test"
+  fill_in "user_password", :with => "pa$$word"
+
+  click_button "Log in"
+end
+
+When("I click on the log out button") do
+  click_link "Log out"
+end
+
+Then("I should be redirected to the log in page") do
+  expect(page).to have_content("Log in")
+end

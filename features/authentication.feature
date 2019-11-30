@@ -15,3 +15,9 @@ Scenario: User Logs in
   And I visit the homepage
   When I fill in the loggin form
   Then I should be logged in
+
+Scenario: User Logs out
+  Given I am a registered user
+  And I am logged in
+  When I click on the log out button
+  Then I should be redirected to the log in page
