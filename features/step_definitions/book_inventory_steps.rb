@@ -28,3 +28,23 @@ Then("I should see the new book in my inventory") do
   expect(page).to have_content("War and Peace")
   expect(page).to have_content("Leo Tolstoy")
 end
+
+Given("I have a book in my inventory") do
+  FactoryBot.create(:book,
+                      user:  @registered_user,
+                      name: 'Don Quixote',
+                      author: 'Miguel de Cervantes')
+end
+
+When("I change the title of my inventory") do
+  visit root_path
+  click_link "Edit"
+  book_name_updated = 'Don Quixote Updated'
+  fill_in "book_name", with: book_name_updated
+  click_button "Update Book"
+end
+
+Then("I should see the book with the new titile in my inventory") do
+  visit root_path
+  expect(page).to have_content 'Don Quixote Updated'
+end
