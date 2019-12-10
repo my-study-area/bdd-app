@@ -1,3 +1,4 @@
+@javascript
 Feature: Book Inventory
 
   In orde to be able to keep track of my books
@@ -21,3 +22,8 @@ Feature: Book Inventory
     Given I have a book in my inventory
     When I change the title of my inventory
     Then I should see the book with the new titile in my inventory
+
+  Scenario: Removing a book from my inventory
+    Given I have a book in my inventory
+    When I remove a book from my inventory
+    Then I should not see it listining in the inventory anymore

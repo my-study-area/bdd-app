@@ -48,3 +48,14 @@ Then("I should see the book with the new titile in my inventory") do
   visit root_path
   expect(page).to have_content 'Don Quixote Updated'
 end
+
+When("I remove a book from my inventory") do
+  visit root_path
+  click_link 'Destroy'
+  page.driver.browser.switch_to.alert.accept
+end
+
+Then("I should not see it listining in the inventory anymore") do
+  visit root_path
+  expect(page).to_not have_content 'Don Quixote Updated'
+end
