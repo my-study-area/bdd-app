@@ -10,6 +10,22 @@ require 'email_spec/cucumber'
 
 # frozen_string_literal: true
 
+# Capybara config with docker-compose environment vars
+Capybara.app_host = "http://#{ENV['TEST_APP_HOST']}:#{ENV['TEST_PORT']}"
+Capybara.javascript_driver = :selenium
+Capybara.run_server = false
+
+args = ['--no-default-browser-check', '--start-maximized']
+caps = Selenium::WebDriver::Remote::Capabilities.firefox()
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(
+      app,
+      browser: :remote,
+      url: "http://#{ENV['SELENIUM_HOST']}:#{ENV['SELENIUM_PORT']}/wd/hub",
+      desired_capabilities: caps
+  )
+end
+
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
